@@ -1,0 +1,15 @@
+[project]
+name = "xasguitar-backend"
+version = "0.1.0"
+description = "Python microservice for Xasguitar audio analysis"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.9.0",
+    "python-multipart>=0.0.12",
+    "aiofiles>=24.1.0",
+    "yt-dlp>=2024.8.0",
+    "librosa>=0.10.0",
+    "numpy>=1.26.0",
+]
