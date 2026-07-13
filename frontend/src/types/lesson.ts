@@ -1,4 +1,5 @@
-export type Difficulty = "beginner" | "intermediate" | "advanced";
+export type Difficulty = "starter" | "beginner" | "intermediate" | "advanced";
+export type LessonStatus = "completed" | "active" | "locked";
 
 export interface Lesson {
   slug: string;
@@ -9,6 +10,7 @@ export interface Lesson {
   videoUrl?: string;
   content: string;
   tags: string[];
+  status?: LessonStatus;
 }
 
 export interface Track {

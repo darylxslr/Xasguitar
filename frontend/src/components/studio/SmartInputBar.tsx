@@ -2,6 +2,7 @@
 
 import { useState, useRef, DragEvent } from "react";
 import { Link, Upload, Search, Music } from "lucide-react";
+import { motion } from "framer-motion";
 
 type InputMode = "url" | "upload" | "search";
 
@@ -49,7 +50,7 @@ export default function SmartInputBar({ onAnalyze, onSearch, loading }: SmartInp
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <div className="flex items-center justify-center gap-1 mb-6 bg-bg-secondary rounded-xl p-1 border border-bg-tertiary">
+      <div className="flex items-center justify-center mb-6 bg-bg-secondary rounded-xl p-1 border border-bg-tertiary">
         {modes.map((m) => {
           const Icon = m.icon;
           const isActive = mode === m.key;
@@ -57,14 +58,21 @@ export default function SmartInputBar({ onAnalyze, onSearch, loading }: SmartInp
             <button
               key={m.key}
               onClick={() => setMode(m.key)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all min-touch ${
+              className={`relative flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors min-touch ${
                 isActive
-                  ? "bg-accent-amber text-bg-primary shadow-sm"
+                  ? "text-accent-amber"
                   : "text-text-secondary hover:text-text-primary"
               }`}
             >
-              <Icon className="w-4 h-4" />
-              <span>{m.label}</span>
+              {isActive && (
+                <motion.div
+                  layoutId="mode-indicator"
+                  className="absolute inset-0 bg-accent-amber/10 rounded-lg"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+              <Icon className="relative z-10 w-4 h-4" />
+              <span className="relative z-10">{m.label}</span>
             </button>
           );
         })}
@@ -83,7 +91,7 @@ export default function SmartInputBar({ onAnalyze, onSearch, loading }: SmartInp
           <button
             onClick={handleSubmit}
             disabled={!url || loading}
-            className="px-6 py-3 bg-accent-amber text-bg-primary font-semibold rounded-xl hover:opacity-90 transition-all disabled:opacity-50 min-touch"
+            className="px-6 py-3 bg-accent-amber/10 text-accent-amber font-semibold rounded-xl hover:bg-accent-amber/20 transition-all disabled:opacity-50 min-touch"
           >
             {loading ? "Analyzing..." : "Analyze"}
           </button>
@@ -133,7 +141,7 @@ export default function SmartInputBar({ onAnalyze, onSearch, loading }: SmartInp
           <button
             onClick={handleSubmit}
             disabled={!query || loading}
-            className="px-6 py-3 bg-accent-amber text-bg-primary font-semibold rounded-xl hover:opacity-90 transition-all disabled:opacity-50 min-touch"
+            className="px-6 py-3 bg-accent-amber/10 text-accent-amber font-semibold rounded-xl hover:bg-accent-amber/20 transition-all disabled:opacity-50 min-touch"
           >
             <Search className="w-4 h-4" />
           </button>

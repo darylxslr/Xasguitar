@@ -37,7 +37,7 @@ export default function CapoCalculator() {
             className="bg-bg-tertiary rounded-lg p-3 border border-bg-tertiary"
           >
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-accent-amber font-bold text-lg">
+              <span className="text-accent-amber font-bold text-sm">
                 Capo {s.capoFret === 1 ? "Fret 1" : `Fret ${s.capoFret}`}
               </span>
               <span className="text-xs text-text-muted">recommended</span>

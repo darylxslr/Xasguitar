@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Guitar } from "lucide-react";
+import { Bot } from "lucide-react";
 import SmartInputBar from "@/components/studio/SmartInputBar";
 import TrendingTabs from "@/components/studio/TrendingTabs";
 import { trendingTabs, sampleSongs } from "@/data/songs";
@@ -32,15 +32,18 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-12">
-      <div className="text-center mb-10">
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <Guitar className="w-10 h-10 text-accent-amber" />
-          <h1 className="text-4xl font-bold text-text-primary tracking-tight">
-            Xasguitar
-          </h1>
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent-amber/30 mb-8">
+          <Bot className="w-3.5 h-3.5 text-accent-amber" />
+          <span className="text-xs font-mono text-accent-amber tracking-[0.2em] uppercase">
+            AI-Powered Chord Detection
+          </span>
         </div>
-        <p className="text-text-secondary text-lg max-w-md mx-auto">
-          Analyze any song, learn every chord. Your smart guitar studio.
+        <h1 className="text-5xl sm:text-5xl font-extrabold text-text-primary tracking-tight leading-tight mb-4">
+          Analyze Any Song
+        </h1>
+        <p className="text-text-secondary text-sm max-w-xl mx-auto leading-relaxed">
+          Paste a YouTube URL, upload an MP3, or search any track. Get synchronized chords, BPM, key detection, and interactive diagrams in seconds.
         </p>
       </div>
 

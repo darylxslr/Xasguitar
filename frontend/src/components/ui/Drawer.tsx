@@ -31,7 +31,7 @@ export default function Drawer({ open, onClose, title, children }: DrawerProps) 
             className="fixed bottom-0 left-0 right-0 z-50 bg-bg-secondary rounded-t-2xl border-t border-bg-tertiary max-h-[70vh] overflow-y-auto"
           >
             <div className="sticky top-0 bg-bg-secondary/80 backdrop-blur-sm flex items-center justify-between p-4 border-b border-bg-tertiary">
-              <h3 className="text-lg font-semibold text-text-primary">{title}</h3>
+              <h3 className="text-sm font-semibold text-text-primary uppercase tracking-wider">{title}</h3>
               <button
                 onClick={onClose}
                 className="p-2 rounded-lg hover:bg-bg-tertiary text-text-secondary transition-colors min-touch"

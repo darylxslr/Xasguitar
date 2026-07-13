@@ -1,5 +1,6 @@
 "use client";
 
+import { Flame } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import { TrendingTab } from "@/types/song";
@@ -18,13 +19,14 @@ export default function TrendingTabs({ tabs, onSelect }: TrendingTabsProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {tabs.map((tab) => (
           <Card key={tab.id} hover onClick={() => onSelect(tab)}>
-            <div className="flex flex-col gap-2">
-              <h3 className="text-text-primary font-semibold truncate">
+            <div className="flex flex-col gap-2.5">
+              <h3 className="text-text-primary font-semibold truncate flex items-center gap-1.5">
+                <Flame className="w-4 h-4 text-accent-amber shrink-0" />
                 {tab.title}
               </h3>
               <p className="text-text-muted text-sm truncate">{tab.artist}</p>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-xs font-mono text-accent-cyan bg-accent-cyan/10 px-2 py-0.5 rounded">
+              <div className="flex items-center gap-2 pt-3 mt-3 border-t border-bg-tertiary">
+                <span className="text-xs font-mono text-accent-amber bg-accent-amber/10 px-2 py-0.5 rounded">
                   {tab.key}
                 </span>
                 <span className="text-xs text-text-muted">{tab.tempo} BPM</span>

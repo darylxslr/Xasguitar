@@ -1,21 +1,22 @@
 export const colors = {
   bg: {
-    primary: "#121212",
-    secondary: "#1E1E1E",
+    primary: "#0A0A0C",
+    secondary: "#141416",
     tertiary: "#2A2A2A",
   },
   accent: {
     amber: "#FFB703",
-    cyan: "#00F5D4",
+    cyan: "#00D4FF",
   },
   text: {
-    primary: "#F8F9FA",
-    secondary: "#A0AEC0",
+    primary: "#FFFFFF",
+    secondary: "#888888",
     muted: "#6B7280",
   },
   difficulty: {
+    starter: "#00D4FF",
     beginner: "#22C55E",
-    intermediate: "#EAB308",
-    advanced: "#EF4444",
+    intermediate: "#B8860B",
+    advanced: "#8B0000",
   },
 } as const;

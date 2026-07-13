@@ -1,8 +1,9 @@
 import { HTMLAttributes } from "react";
 
-type BadgeVariant = "beginner" | "intermediate" | "advanced" | "default";
+type BadgeVariant = "starter" | "beginner" | "intermediate" | "advanced" | "default";
 
 const badgeStyles: Record<BadgeVariant, string> = {
+  starter: "bg-difficulty-starter/10 text-difficulty-starter border-difficulty-starter/20",
   beginner: "bg-difficulty-beginner/10 text-difficulty-beginner border-difficulty-beginner/20",
   intermediate: "bg-difficulty-intermediate/10 text-difficulty-intermediate border-difficulty-intermediate/20",
   advanced: "bg-difficulty-advanced/10 text-difficulty-advanced border-difficulty-advanced/20",

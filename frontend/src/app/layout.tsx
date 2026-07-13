@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Xasguitar — Smart Studio & Guitar Academy",
@@ -23,7 +24,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-bg-primary text-text-primary">
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
