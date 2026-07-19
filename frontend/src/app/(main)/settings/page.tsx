@@ -1,6 +1,6 @@
 "use client";
 
-import { Sun, Moon, Volume2, Gauge, Info, ExternalLink } from "lucide-react";
+import { Sun, Moon, Volume2, Gauge, Heart, Mail, Info, ExternalLink } from "lucide-react";
 import { useTheme } from "@/providers/ThemeProvider";
 import { useLocalSettings } from "@/hooks/useLocalSettings";
 import Card from "@/components/ui/Card";
@@ -126,6 +126,56 @@ export default function SettingsPage() {
 
       <section>
         <h2 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3">
+          Support
+        </h2>
+        <Card>
+          <div className="flex items-start gap-3">
+            <Heart className="w-5 h-5 text-text-secondary shrink-0 mt-0.5" />
+            <div className="text-sm text-text-secondary space-y-3 w-full">
+              <p className="text-text-primary font-semibold">
+                Fund the Project
+              </p>
+              <p>
+                Xasguitar is a one-person project built with passion and
+                offered freely to everyone. No premium tiers, no locked
+                lessons. If this tool has genuinely helped you learn and
+                you ever feel moved to support the person behind it,
+                even a small donation would mean everything.
+              </p>
+
+              <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-bg-tertiary">
+                <img
+                  src="/gcash-qr.jpg"
+                  alt="GCash QR"
+                  className="w-36 h-36 rounded-lg"
+                />
+                <div className="text-center">
+                  <p className="text-xs font-semibold text-text-primary uppercase tracking-wider">
+                    GCash
+                  </p>
+                  <p className="text-xs text-text-muted mt-0.5">
+                    Scan the QR code to send a donation
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 text-xs text-text-muted">
+                <Mail className="w-3.5 h-3.5 shrink-0" />
+                <span>Built by a solo dev. Reach out at</span>
+                <a
+                  href="mailto:xasdev05@gmail.com"
+                  className="text-accent-amber hover:underline"
+                >
+                  xasdev05@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      <section>
+        <h2 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3">
           About
         </h2>
         <Card>
@@ -136,8 +186,11 @@ export default function SettingsPage() {
                 Xasguitar v1.0.0
               </p>
               <p>
-                Analyze songs, learn guitar. A free, open-source platform for
-                guitar enthusiasts.
+                An open-source guitar learning platform that makes
+                learning accessible to everyone &mdash; no login,
+                no paywalls, just free lessons, chord diagrams, and
+                song analysis tools for guitar enthusiasts of all
+                levels.
               </p>
               <a
                 href="https://github.com/anomalyco/xasguitar"

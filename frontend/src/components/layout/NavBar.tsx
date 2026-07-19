@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Guitar, Waves, BookOpen, Sun, Moon, Settings } from "lucide-react";
+import { Guitar, Waves, BookOpen, Music2, Sun, Moon, Settings } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/providers/ThemeProvider";
-import SearchBar from "./SearchBar";
+
 
 const navLinks = [
   { href: "/", label: "Studio", icon: Waves },
   { href: "/academy", label: "Academy", icon: BookOpen },
+  { href: "/chords", label: "Chords", icon: Music2 },
 ];
 
 export default function NavBar() {
@@ -17,8 +18,8 @@ export default function NavBar() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-bg-primary/80 backdrop-blur-lg border-b border-bg-tertiary">
-      <div className="w-full px-4 h-16 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+    <nav className="sticky top-0 z-50 w-full bg-bg-primary border-b border-bg-tertiary">
+      <div className="w-full max-w-7xl mx-auto px-4 h-16 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
         <Link href="/" className="flex items-center gap-2 shrink-0">
           <Guitar className="w-7 h-7 text-accent-amber" />
           <span className="text-lg font-bold text-text-primary tracking-tight hidden sm:inline">
@@ -57,7 +58,6 @@ export default function NavBar() {
         </div>
 
         <div className="flex items-center gap-3 justify-self-end">
-          {pathname.startsWith("/academy") && <SearchBar />}
           <div className="flex items-center gap-1">
               <button
                 onClick={toggleTheme}

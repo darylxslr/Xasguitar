@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Xasguitar — Frontend
 
-## Getting Started
+Next.js 16 guitar learning UI with song analysis studio, chord library, and academy curriculum.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| Layer            | Library                                                    |
+| ---------------- | ---------------------------------------------------------- |
+| Framework        | Next.js 16 (App Router), React 19                          |
+| Language         | TypeScript 5 (strict)                                      |
+| Styling          | Tailwind CSS v4 (CSS-first config)                         |
+| State            | Zustand 5                                                   |
+| Data Fetching    | TanStack React Query 5                                     |
+| Animations       | Framer Motion 12                                            |
+| Audio            | WaveSurfer.js 7, Tone.js 15                                 |
+| Music Theory     | Tonal.js 4                                                  |
+| Icons            | Lucide React, Tabler Icons                                  |
+
+## Directory Structure
+
+```
+src/
+├── app/                    Next.js App Router pages
+│   ├── (main)/             Route group with shared NavBar
+│   │   ├── page.tsx        Home — SmartInputBar + TrendingTabs
+│   │   ├── academy/        Curriculum dashboard + lesson pages
+│   │   ├── chords/         Chord library browser
+│   │   ├── settings/       Theme, audio, shortcuts, about, donate
+│   │   └── studio/[id]/    Song analysis workspace
+│   └── api/metadata/       Backend proxy route
+├── components/
+│   ├── academy/            LessonCard, LessonPlayer, CurriculumGrid, InteractiveFretboard
+│   ├── chords/             ChordLibrary, ChordCard, ChordDiagram, ChordPopup, HandDiagram
+│   ├── layout/             NavBar, SearchBar
+│   ├── studio/             SmartInputBar, WaveformPlayer, ChordTimeline, TablatureView, etc.
+│   └── ui/                 Badge, Button, Card, Drawer, Input, Pill, Slider, Tooltip
+├── constants/              Music theory constants, theme palette
+├── data/                   Lesson curriculum data, sample songs
+├── hooks/                  useAudioPlayer, useSongAnalysis, useKeyboardShortcuts, useLocalSettings
+├── lib/
+│   ├── api/                Backend API client, MusicBrainz search, YouTube URL parser
+│   ├── audio/              WaveSurfer factory, client-side BPM/key estimation
+│   ├── theory/             Chord voicings, finger assignment, scales, transposition, capo
+│   └── utils/              Chord normalization, formatting helpers
+├── providers/              ThemeProvider (dark/light)
+├── stores/                 Zustand store (song, capo, transpose, player state)
+└── types/                  Song, Lesson, ChordShape type definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route              | Description                                         |
+| ------------------ | --------------------------------------------------- |
+| `/`                | Home — paste URL, upload audio, or search songs     |
+| `/studio/[id]`     | Song analysis with waveform, chord timeline, tabs   |
+| `/academy`         | Curriculum dashboard — 3 tracks, 15 lessons         |
+| `/academy/[slug]`  | Individual lesson page with YouTube embed           |
+| `/chords`          | Chord library with 40+ shapes, interactive popup    |
+| `/settings`        | Theme toggle, audio prefs, keyboard shortcuts, about |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key Features
 
-## Learn More
+- **Smart Input Bar** — three input modes (YouTube URL, file upload, text search)
+- **Studio** — synchronized waveform + chord timeline + tablature + capo/transpose controls
+- **Chord Library** — 40+ chord shapes across 10 categories, interactive fretboard + hand diagram popup
+- **Academy** — 15 unlocked lessons across Beginner/Intermediate/Advanced tracks
+- **Music Theory Engine** — chord voicings, scale generation, transposition, finger assignment, capo recommendation
+- **Dark/Light Theme** — persisted to localStorage
+- **Keyboard Shortcuts** — space (play/pause), arrows (seek), +/- (speed)
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command           | Description                     |
+| ----------------- | ------------------------------- |
+| `npm run dev`     | Start development server        |
+| `npm run build`   | Production build                |
+| `npm run start`   | Serve production build          |
+| `npm run lint`    | ESLint check                    |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable                     | Default                   | Description                    |
+| ---------------------------- | ------------------------- | ------------------------------ |
+| `NEXT_PUBLIC_BACKEND_URL`    | `http://localhost:8000`   | Python backend base URL        |

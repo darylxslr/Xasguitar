@@ -2,6 +2,7 @@ export interface NotePosition {
   string: number;
   fret: number;
   note: string;
+  finger?: number;
 }
 
 export interface ChordShape {
