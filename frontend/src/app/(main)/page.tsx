@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Bot } from "lucide-react";
 import SmartInputBar from "@/components/studio/SmartInputBar";
 import TrendingTabs from "@/components/studio/TrendingTabs";
+import ComingSoonPopup from "@/components/studio/ComingSoonPopup";
 import { trendingTabs, sampleSongs } from "@/data/songs";
 import { TrendingTab } from "@/types/song";
 
@@ -56,6 +57,8 @@ export default function HomePage() {
       <div className="mt-16 w-full">
         <TrendingTabs tabs={trendingTabs} onSelect={handleSelectTab} />
       </div>
+
+      <ComingSoonPopup />
     </div>
   );
 }

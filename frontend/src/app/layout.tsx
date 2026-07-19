@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Xasguitar — Smart Studio & Guitar Academy",
   description:
     "Analyze songs, learn guitar. A free, open-source platform for guitar enthusiasts.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

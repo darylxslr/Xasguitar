@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Guitar, Waves, BookOpen, Music2, Sun, Moon, Settings } from "lucide-react";
+import { Waves, BookOpen, Music2, Sun, Moon, Settings } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/providers/ThemeProvider";
 
@@ -20,10 +20,10 @@ export default function NavBar() {
   return (
     <nav className="sticky top-0 z-50 w-full bg-bg-primary border-b border-bg-tertiary">
       <div className="w-full max-w-7xl mx-auto px-4 h-16 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <Guitar className="w-7 h-7 text-accent-amber" />
-          <span className="text-lg font-bold text-text-primary tracking-tight hidden sm:inline">
-            XASGUITAR
+        <Link href="/" className="flex items-center gap-0 shrink-0">
+          <img src="/logo.svg" alt="Xasguitar" className="w-15 h-15" />
+          <span className="text-lg font-bold text-text-primary tracking-tight hidden sm:inline -ml-2">
+            ASGUITAR
           </span>
         </Link>
 
