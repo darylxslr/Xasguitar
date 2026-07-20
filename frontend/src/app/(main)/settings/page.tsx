@@ -193,7 +193,7 @@ export default function SettingsPage() {
                 levels.
               </p>
               <a
-                href="https://github.com/anomalyco/xasguitar"
+                href="https://github.com/darylxslr/Xasguitar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-accent-amber hover:underline mt-2"
