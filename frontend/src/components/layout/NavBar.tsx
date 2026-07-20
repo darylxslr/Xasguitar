@@ -22,7 +22,7 @@ export default function NavBar() {
       <div className="w-full max-w-7xl mx-auto px-4 h-16 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
         <Link href="/" className="flex items-center gap-0 shrink-0">
           <img src="/logo.svg" alt="Xasguitar" className="w-15 h-15" />
-          <span className="text-lg font-bold text-text-primary tracking-tight hidden sm:inline -ml-2">
+          <span className="text-lg font-bold text-text-primary tracking-tight hidden sm:inline -ml-0">
             ASGUITAR
           </span>
         </Link>
