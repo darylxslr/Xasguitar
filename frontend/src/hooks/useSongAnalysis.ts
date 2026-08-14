@@ -9,22 +9,19 @@ export function useSongAnalysis() {
   const [loading, setLoading] = useState(false);
   const [song, setSong] = useState<Song | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [progress, setProgress] = useState("");
 
   const analyze = useCallback(async (input: File | string) => {
     setLoading(true);
     setError(null);
-    try {
-      const result = await analyzeSong(input);
-      if (result) {
-        setSong(result);
-      } else {
-        setError("Failed to analyze this song. Try a different source.");
-      }
-    } catch {
-      setError("Analysis failed. Please try again.");
-    } finally {
-      setLoading(false);
+    setProgress("");
+    const result = await analyzeSong(input, (p) => setProgress(p));
+    if (result.song) {
+      setSong(result.song);
+    } else {
+      setError(result.error || "Failed to analyze this song. Try a different source.");
     }
+    setLoading(false);
   }, []);
 
   const search = useCallback(async (query: string) => {
@@ -44,5 +41,5 @@ export function useSongAnalysis() {
     }
   }, []);
 
-  return { song, loading, error, analyze, search };
+  return { song, loading, error, progress, analyze, search };
 }

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from app.core.chord_estimator import estimate_chords
+from app.core.chord_estimator import analyze_audio
 from app.core.audio_processor import save_temp_audio
 
 router = APIRouter()
@@ -13,6 +13,6 @@ async def transcribe_audio(
         raise HTTPException(status_code=400, detail="No audio file provided")
 
     file_path = await save_temp_audio(audio)
-    chord_timeline = estimate_chords(file_path)
+    result = analyze_audio(file_path)
 
-    return {"chordTimeline": chord_timeline}
+    return {"chordTimeline": result["chords"]}

@@ -14,6 +14,7 @@ class MediaInfo(BaseModel):
     sourceType: str
     sourceUrl: str
     audioDuration: float
+    audioUrl: str = ""
 
 
 class ChordEvent(BaseModel):
