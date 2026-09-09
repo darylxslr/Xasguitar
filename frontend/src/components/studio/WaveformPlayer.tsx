@@ -2,20 +2,78 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward, RotateCcw } from "lucide-react";
+import WaveSurfer from "wavesurfer.js";
 import { Button } from "@/components/ui/Button";
 import Slider from "@/components/ui/Slider";
 import { useStudioStore } from "@/stores/studio";
 
-interface WaveformPlayerProps {
-  audioUrl?: string;
-}
-
-export default function WaveformPlayer({ audioUrl }: WaveformPlayerProps) {
+export default function WaveformPlayer() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { isPlaying, speed, currentTime, setIsPlaying, setCurrentTime, setSpeed } = useStudioStore();
+  const waveSurferRef = useRef<WaveSurfer | null>(null);
+  const loopRef = useRef<{ start: number | null; end: number | null }>({ start: null, end: null });
+  const { song, isPlaying, speed, currentTime, setIsPlaying, setCurrentTime, setSpeed } =
+    useStudioStore();
   const [duration, setDuration] = useState(0);
   const [loopStart, setLoopStart] = useState<number | null>(null);
   const [loopEnd, setLoopEnd] = useState<number | null>(null);
+
+  const audioUrl = song?.media?.audioUrl;
+
+  useEffect(() => {
+    loopRef.current = { start: loopStart, end: loopEnd };
+  }, [loopStart, loopEnd]);
+
+  useEffect(() => {
+    if (!containerRef.current || !audioUrl) return;
+
+    const ws = WaveSurfer.create({
+      container: containerRef.current,
+      height: 80,
+      waveColor: "rgba(255, 183, 3, 0.35)",
+      progressColor: "#FFB703",
+      cursorColor: "rgba(255, 183, 3, 0.8)",
+      cursorWidth: 1,
+      url: audioUrl,
+    });
+    waveSurferRef.current = ws;
+
+    ws.on("ready", () => setDuration(ws.getDuration()));
+
+    ws.on("timeupdate", (time: number) => {
+      const { start, end } = loopRef.current;
+      if (start !== null && end !== null && time > end) {
+        ws.setTime(start);
+        ws.play();
+      }
+      setCurrentTime(time);
+    });
+
+    ws.on("finish", () => setIsPlaying(false));
+
+    return () => {
+      ws.destroy();
+      waveSurferRef.current = null;
+    };
+  }, [audioUrl, setCurrentTime, setIsPlaying]);
+
+  useEffect(() => {
+    const ws = waveSurferRef.current;
+    if (!ws) return;
+    if (isPlaying) ws.play();
+    else ws.pause();
+  }, [isPlaying]);
+
+  useEffect(() => {
+    waveSurferRef.current?.setPlaybackRate(speed);
+  }, [speed]);
+
+  useEffect(() => {
+    const ws = waveSurferRef.current;
+    if (!ws) return;
+    if (Math.abs(ws.getCurrentTime() - currentTime) > 0.1) {
+      ws.setTime(currentTime);
+    }
+  }, [currentTime]);
 
   const format = (s: number) => {
     const m = Math.floor(s / 60);
@@ -68,7 +126,7 @@ export default function WaveformPlayer({ audioUrl }: WaveformPlayerProps) {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => setCurrentTime(Math.min(duration, currentTime + 5))}
+          onClick={() => setCurrentTime(Math.min(duration || currentTime, currentTime + 5))}
         >
           <SkipForward className="w-4 h-4" />
         </Button>

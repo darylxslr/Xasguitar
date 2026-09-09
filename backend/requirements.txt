@@ -8,4 +8,4 @@ yt-dlp>=2024.8.0
 librosa>=0.10.0
 numpy>=1.26.0
 scipy>=1.14.0
-vamp==1.2.0
+vamp==1.1.0

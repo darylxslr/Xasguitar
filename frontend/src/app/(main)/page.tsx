@@ -1,29 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Bot } from "lucide-react";
 import SmartInputBar from "@/components/studio/SmartInputBar";
 import TrendingTabs from "@/components/studio/TrendingTabs";
 import ComingSoonPopup from "@/components/studio/ComingSoonPopup";
-import { trendingTabs, sampleSongs } from "@/data/songs";
+import { trendingTabs } from "@/data/songs";
 import { TrendingTab } from "@/types/song";
+import { useSongAnalysis } from "@/hooks/useSongAnalysis";
+import { useStudioStore } from "@/stores/studio";
 
 export default function HomePage() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const { analyze, search, song, loading, error, progress } = useSongAnalysis();
 
-  const handleAnalyze = async (input: File | string) => {
-    setLoading(true);
-    if (typeof input === "string" && input.includes("youtube.com/watch")) {
-      router.push("/studio/song-1");
-    } else {
-      router.push("/studio/song-2");
+  useEffect(() => {
+    if (song) {
+      useStudioStore.getState().setSong(song);
+      router.push(`/studio/${song.id}`);
     }
+  }, [song, router]);
+
+  const handleAnalyze = (input: File | string) => {
+    analyze(input);
   };
 
   const handleSearch = async (query: string) => {
-    setLoading(true);
+    search(query);
     router.push("/studio/song-3");
   };
 
@@ -52,7 +56,14 @@ export default function HomePage() {
         onAnalyze={handleAnalyze}
         onSearch={handleSearch}
         loading={loading}
+        progress={progress}
       />
+
+      {error && (
+        <p className="text-accent-amber text-sm mt-4 text-center max-w-md">
+          {error}
+        </p>
+      )}
 
       <div className="mt-16 w-full">
         <TrendingTabs tabs={trendingTabs} onSelect={handleSelectTab} />

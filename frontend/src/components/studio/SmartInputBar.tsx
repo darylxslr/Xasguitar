@@ -10,9 +10,10 @@ interface SmartInputBarProps {
   onAnalyze: (input: File | string) => void;
   onSearch: (query: string) => void;
   loading?: boolean;
+  progress?: string;
 }
 
-export default function SmartInputBar({ onAnalyze, onSearch, loading }: SmartInputBarProps) {
+export default function SmartInputBar({ onAnalyze, onSearch, loading, progress }: SmartInputBarProps) {
   const [mode, setMode] = useState<InputMode>("url");
   const [url, setUrl] = useState("");
   const [query, setQuery] = useState("");
@@ -146,6 +147,10 @@ export default function SmartInputBar({ onAnalyze, onSearch, loading }: SmartInp
             <Search className="w-4 h-4" />
           </button>
         </div>
+      )}
+
+      {loading && progress && (
+        <p className="text-sm text-text-muted text-center mt-4">{progress}</p>
       )}
     </div>
   );
