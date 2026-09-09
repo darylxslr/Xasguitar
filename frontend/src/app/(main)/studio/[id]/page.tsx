@@ -15,12 +15,12 @@ import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 
 export default function StudioPage() {
   const params = useParams();
-  const { setSong, setIsPlaying, isPlaying } = useStudioStore();
+  const { setSong, setIsPlaying, isPlaying, song: storeSong } = useStudioStore();
 
-  const song = useMemo(
-    () => sampleSongs.find((s) => s.id === params.id) || sampleSongs[0],
-    [params.id]
-  );
+  const song = useMemo(() => {
+    if (storeSong && storeSong.id === params.id) return storeSong;
+    return sampleSongs.find((s) => s.id === params.id) || sampleSongs[0];
+  }, [params.id, storeSong]);
 
   useEffect(() => {
     if (song) setSong(song);

@@ -10,6 +10,7 @@ export interface MediaInfo {
   sourceType: "youtube" | "upload" | "search";
   sourceUrl: string;
   audioDuration: number;
+  audioUrl?: string;
 }
 
 export interface ChordEvent {
